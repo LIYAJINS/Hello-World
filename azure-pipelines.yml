@@ -1,27 +1,23 @@
 trigger:
-- main  # Pipeline triggers on changes to the main branch
+- main
 
 stages:
 - stage: Build
-  displayName: Build Stage
   jobs:
   - job: BuildJob
-    displayName: Build Job
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - script: echo " Building the application..."
-    - script: echo " Build complete"
+    - script: echo "Building the app"
+    - script: echo "Build complete"
 
 - stage: DeployToProd
-  displayName: Deploy to Production
-  dependsOn: Build  # This stage runs only after the Build stage completes
+  dependsOn: Build
   jobs:
-  - deployment: DeployProduction
-    displayName: Production Deployment
-    environment: production  # Name should match an environment that may have manual approval
+  - deployment: DeployProd
+    environment: production
     strategy:
       runOnce:
         deploy:
           steps:
-          - script: echo " Deploying to Production Environment..."
+          - script: echo "Deploying to Production"
