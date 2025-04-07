@@ -15,11 +15,11 @@ stages:
 
 - stage: DeployToProd
   displayName: Deploy to Production
-  dependsOn: Build  # This stage runs only after the Build stage completes
+  dependsOn: Build
   jobs:
   - deployment: DeployProduction
     displayName: Production Deployment
-    environment: production  # Name should match an environment that may have manual approval
+    environment: production
     strategy:
       runOnce:
         deploy:
